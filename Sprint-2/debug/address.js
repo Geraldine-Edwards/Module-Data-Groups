@@ -1,4 +1,6 @@
 // Predict and explain first...
+/* I expect the code to produce an error because originally it is trying to console log the [0] index of a property in an object when there is no "0" in the address object.
+ */
 
 // This code should log out the houseNumber from the address object
 // but it isn't working...
@@ -12,4 +14,6 @@ const address = {
   postcode: "XYZ 123",
 };
 
-console.log(`My house number is ${address[0]}`);
+console.log(`My house number is ${address["houseNumber"]}`);
+// Or we could access the house number like this:
+console.log(`My house number is ${address.houseNumber}`);
