@@ -24,5 +24,5 @@ const author = {
 //   console.log(value);
 // }
 for (const key in author) {
-  console.log(author[value]);
+  console.log(author[key]);
 }
