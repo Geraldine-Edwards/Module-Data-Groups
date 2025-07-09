@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* remove the bullet point */
+#reading-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+/* style the result of each book in the list */
+#reading-list li {
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #ddd;
+}
+
+/* adjust the size of the images */
+#reading-list li img {
+  width: 150px;
+  height: auto;
+  margin-right: 15px;
+  vertical-align: middle;
+}
+
+/* 
+for the alreadyRead property of each book: 
+if it is  "already-read" set the background colour to green, otherwise set to it to red. 
+*/
+.not-read {
+  background-color: red;
+}
+
+.already-read {
+  background-color: green;
+}
