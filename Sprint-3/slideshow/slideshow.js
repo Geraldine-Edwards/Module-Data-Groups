@@ -12,18 +12,19 @@ function updateDisplay() {
   slideImage.src = images[currentImageIndex];
 
   // update the image number display
-  const imageCounter = (document.querySelector("p").textContent = `Image ${
-    currentImageIndex + 1
-  } of ${images.length}`);
+  const imageCounter = (document.querySelector(
+    "#image-counter"
+  ).textContent = `Image ${currentImageIndex + 1} of ${images.length}`);
 }
 
-// get the image and button elements from the DOM
+// get the image, button and interval elements from the DOM
 const slideImage = document.querySelector("#carousel-img");
 const forwardButton = document.querySelector("#forward-btn");
 const backButton = document.querySelector("#backward-btn");
 const autoForwardBtn = document.querySelector("#auto-forward");
 const autoBackBtn = document.querySelector("#auto-backward");
 const stopButton = document.querySelector("#stop");
+const speedSelect = document.querySelector("#speed-select");
 
 // track the current image index
 let currentImageIndex = 0;
@@ -78,21 +79,30 @@ let autoTimer = null;
 
 // when the user clicks an 'auto' button disable both the 'auto' buttons, then use the autoTimer variable and assign the setInterval() method with the forward button logic to automatically move the image forward every 2 seconds when the auto-forward button is clicked
 autoForwardBtn.addEventListener("click", () => {
+  // the value of speedSelect is a string type therefore we have to convert the value of milliseconds from the user speed selection to an integer
+  const milliseconds = parseInt(speedSelect.value);
+
   // clear any existing autoTimer IDs
   clearInterval(autoTimer);
 
   // disable both the auto buttons when the autoForwardBtn is clicked (as per the test cases)
   autoForwardBtn.disabled = true;
   autoBackBtn.disabled = true;
+  // disable the speed select dropdown when the autoForwardBtn is clicked
+  speedSelect.disabled = true;
 
+  // update SetInterval to use the milliseconds from the user input
   autoTimer = setInterval(() => {
     currentImageIndex = (currentImageIndex + 1) % images.length;
     updateDisplay();
-  }, 2000);
+  }, milliseconds);
 });
 
 // when the user clicks an 'auto' button disable both the 'auto' buttons, then use the autoTimer variable and assign the setInterval() method with the back button logic to automatically move the image backward every 2 seconds when the auto-backward button is clicked
 autoBackBtn.addEventListener("click", () => {
+  // the value of speedSelect is a string type therefore we have to convert the milliseconds from the user speed selection to an integer
+  const milliseconds = parseInt(speedSelect.value);
+
   // clear any existing autoTimer IDs
   clearInterval(autoTimer);
 
@@ -100,17 +110,21 @@ autoBackBtn.addEventListener("click", () => {
   autoForwardBtn.disabled = true;
   autoBackBtn.disabled = true;
 
+  // disable the speed select dropdown when the autoBackwardBtn is clicked
+  speedSelect.disabled = true;
+
   autoTimer = setInterval(() => {
     currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
     updateDisplay();
-  }, 2000);
+  }, milliseconds);
 });
 
 stopButton.addEventListener("click", () => {
   // clear the autoTimer ID to stop the automatic image movement
   clearInterval(autoTimer);
 
-  // re-enable both the auto buttons when the stop button is clicked
+  // re-enable both the auto buttons and the speed selector dropdown when the stop button is clicked
   autoForwardBtn.disabled = false;
   autoBackBtn.disabled = false;
+  speedSelect.disabled = false;
 });

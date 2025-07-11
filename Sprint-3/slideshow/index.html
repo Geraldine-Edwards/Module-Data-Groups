@@ -1,19 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <title>Image Carousel</title>
-    <script defer src="slideshow.js"></script>
-  </head>
-  <body>
-    <img id="carousel-img" src="./assets/cute-cat-a.png" alt="cat-pic" />
-    <p></p>
-    <button type="button" id="auto-backward">Auto Backwards</button>
-    <button type="button" id="backward-btn">Backwards</button>
-    <button type="button" id="stop">Stop</button>
-    <button type="button" id="forward-btn">Forward</button>
-    <button type="button" id="auto-forward">Auto Forward</button>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Image Carousel</title>
+  <script defer src="slideshow.js"></script>
+</head>
+
+<body>
+  <header>
+    <h1 class="app-title">🐾 Cat Gallery</h1>
+  </header>
+
+  <main>
+    <section class="slideshow-container">
+      <img id="carousel-img" src="./assets/cute-cat-a.png" alt="Cute cat photo" />
+      <p aria-live="polite" id="image-counter"></p>
+
+      <div class="timing-controls" role="group" aria-labelledby="speed-label">
+        <label for="speed-select" id="speed-label">Slideshow Speed</label>
+        <select id="speed-select" name="speed-select" aria-describedby="speed-help">
+          <option value="500">Very Fast (0.5s)</option>
+          <option value="1000">Fast (1s)</option>
+          <option value="2000" selected>Normal (2s)</option>
+          <option value="3000">Slow (3s)</option>
+          <option value="5000">Very Slow (5s)</option>
+        </select>
+        <div id="speed-help" class="sr-only">Select how fast images change in automatic mode</div>
+      </div>
+
+      <div class="button-container" role="group" aria-label="Slideshow controls">
+        <button type="button" id="backward-btn" aria-label="Go to previous image">← Previous</button>
+        <button type="button" id="forward-btn" aria-label="Go to next image">Next →</button>
+        <button type="button" id="auto-backward" aria-label="Click for slideshow to automatically move backward">Auto
+          Backwards</button>
+        <button type="button" id="auto-forward" aria-label="Click for slideshow to automatically move forwards">Auto
+          Forwards</button>
+        <button type="button" id="stop" aria-label="Stop automatic slideshow">■ Stop</button>
+      </div>
+
+      <div class="mood-booster" role="complementary">Enjoy these adorable moments ✨</div>
+      </div>
+  </main>
+</body>
+
 </html>

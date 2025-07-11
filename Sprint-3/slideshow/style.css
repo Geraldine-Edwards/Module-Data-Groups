@@ -1,5 +1,224 @@
 /** Write your CSS in here **/
+
+body {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  font-family: "Helvetica", sans-serif;
+  color: #2c3e50;
+  margin: 0;
+  padding: 20px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* title styling */
+.app-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: #34495e;
+  margin-bottom: 30px;
+  letter-spacing: -0.5px;
+  text-align: center;
+}
+
+/* card design */
+.slideshow-container {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08), 0 8px 25px rgba(0, 0, 0, 0.06);
+  text-align: center;
+  max-width: 480px;
+  margin: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* image styling */
 img {
-  width: 500px;
-  height: auto;
+  width: 380px;
+  height: 280px;
+  object-fit: cover;
+  border-radius: 16px;
+  border: none;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+}
+
+/* Clean counter styling */
+p {
+  font-size: 1rem;
+  color: #64748b;
+  font-weight: 500;
+  margin: 20px 0;
+  letter-spacing: 0.5px;
+}
+
+/* Minimal controls container */
+.timing-controls {
+  margin: 24px 0;
+  padding: 20px;
+  background: rgba(248, 250, 252, 0.8);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  border: 1px solid rgba(226, 232, 240, 0.5);
+}
+
+.timing-controls label {
+  font-weight: 500;
+  color: #475569;
+  font-size: 1rem;
+}
+
+/* Clean dropdown */
+#speed-select {
+  font-size: 1rem;
+  padding: 12px 16px;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background: white;
+  color: #334155;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 160px;
+  font-weight: 500;
+}
+
+#speed-select:hover {
+  border-color: #f472b6;
+  box-shadow: 0 4px 16px rgba(244, 114, 182, 0.1);
+}
+
+#speed-select:focus {
+  outline: none;
+  border-color: #f472b6;
+  box-shadow: 0 0 0 3px rgba(244, 114, 182, 0.1);
+}
+
+#speed-select:disabled {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Modern button container */
+.button-container {
+  display: grid;
+  /* create as many 140px+ columns as can fit, all equal in size */
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+  max-width: 420px;
+}
+
+/* Clean button styling */
+button {
+  font-size: 14px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease-out;
+  letter-spacing: 0.025em;
+  min-height: 48px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle modern button colors */
+#forward-btn {
+  background: #3b82f6;
+  color: white;
+}
+
+#backward-btn {
+  background: #8b5cf6;
+  color: white;
+}
+
+#auto-forward {
+  background: #06b6d4;
+  color: white;
+}
+
+#auto-forward:disabled {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+#auto-backward {
+  background: #f472b6;
+  color: white;
+}
+
+#auto-backward:disabled {
+  background-color: #f8fafc;
+  border-color: #e2e8f0;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+#stop {
+  background: #ef4444;
+  color: white;
+}
+
+button:hover {
+  transform: translateY(-2px);
+}
+
+/* Add subtle mood text */
+.mood-booster {
+  margin: 24px 0 0 0;
+  font-size: 15px;
+  color: #64748b;
+  font-weight: 500;
+  letter-spacing: 0.025em;
+}
+
+/* Smooth animations for everything */
+* {
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: 2px solid transparent;
+  outline-offset: 2px;
+}
+
+/* gentle fade in animation for images */
+img {
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .slideshow-container {
+    max-width: 640px; /* Wider on tablets */
+    padding: 50px; /* More padding */
+  }
+
+  img {
+    width: 480px; /* Bigger image */
+    height: 320px;
+  }
+
+  .button-container {
+    max-width: 500px; /* Wider button area */
+  }
 }
