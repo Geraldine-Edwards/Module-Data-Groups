@@ -1,15 +1,18 @@
 // initialize the countdown variable to null so that it can be used to store the interval ID for the countdown (the unique ID for when we use setInterval() to start a countdown later in the code)
 let countdown = null;
 
+// helper function to zero-pad numbers for formatting
+function padNumber(number) {
+  return number.toString().padStart(2, "0");
+}
+
 // helper function to format the display of the time,using the user input numeric value in seconds
 function formatTime(timeValue) {
   // format the input into minutes and seconds MM:SS
-  const minutes = Math.floor(timeValue / 60)
-    .toString()
-    .padStart(2, "0");
-  const seconds = (timeValue % 60).toString().padStart(2, "0");
+  const minutes = Math.floor(timeValue / 60);
+  const seconds = timeValue % 60;
   // return the formatted time in a string
-  return `Time Remaining: ${minutes}:${seconds}`;
+  return `Time Remaining: ${padNumber(minutes)}:${padNumber(seconds)}`;
 }
 
 function setAlarm() {
