@@ -14,6 +14,7 @@ const address = {
   postcode: "XYZ 123",
 };
 
-console.log(`My house number is ${address["houseNumber"]}`);
+// console.log(`My house number is ${address[0]}`); this logs 'My house number is undefined
+console.log(`My house number is ${address["houseNumber"]}`); // this logs 'My house number is 42'
 // Or we could access the house number like this:
-console.log(`My house number is ${address.houseNumber}`);
+console.log(`My house number is ${address.houseNumber}`); // this also logs 'My house number is 42'
