@@ -16,17 +16,8 @@ function populateTodoList(todos) {
     // append the todo item to the list
     list.appendChild(todoItem);
 
-    // Create completed button
-    let completedButton = document.createElement("button");
-    // change the button label based on the todo's completed status
-    if (todo.completed) {
-      completedButton.textContent = "Undo";
-    } else {
-      completedButton.textContent = "Complete";
-    }
-
-    // call the helper function to set up the completed button
-    setupCompletedButton(completedButton, index);
+    // call the helper function to create the completed button
+    let completedButton = createCompletedButton(todo, index);
     // append the completed button to the todo item
     todoItem.appendChild(completedButton);
 
@@ -69,13 +60,21 @@ function addNewTodo(event) {
 // when the user submits the input form calling the function creates a new todo
 document.addEventListener("submit", addNewTodo);
 
-function setupCompletedButton(completedButton, index) {
+function createCompletedButton(todo, index) {
+  // create the complete button
+  let completedButton = document.createElement("button");
+  // toggle the text of the button depending on complete status
+  completedButton.textContent = todo.completed ? "Incomplete" : "Complete";
+  // add the functionality to the button
   completedButton.addEventListener("click", () => {
     // toggle the completed status - flip it to the opposite
     todos[index].completed = !todos[index].completed;
     populateTodoList(todos);
   });
+  // return the completed button so it can be added to the todo item
+  return completedButton;
 }
+
 function deleteTodo() {}
 
 // Advanced challenge: Write a function that checks the todos in the todo list and deletes the completed ones (we can check which ones are completed by seeing if they have the line-through styling applied or not).
