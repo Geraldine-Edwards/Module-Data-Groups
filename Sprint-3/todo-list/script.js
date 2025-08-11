@@ -3,15 +3,31 @@ function populateTodoList(todos) {
   let list = document.getElementById("todo-list");
   // clear the list before populating it to ensure that when adding todos the list does not duplicate because it is cleared initially
   list.textContent = "";
-  // for each todos object, create a list item and append it to the list
-  todos.forEach((todo) => {
+  // for each todos object, create a list item and append it (and its index position) to the list
+  todos.forEach((todo, index) => {
+    // create a list element for each todo
     let todoItem = document.createElement("li");
+    // update the text content in the list with the todo input
     todoItem.textContent = todo.task;
+    // if the todo is completed, add a line-through style to the text
+    if (todo.completed) {
+      todoItem.style.textDecoration = "line-through";
+    }
+    // append the todo item to the list
     list.appendChild(todoItem);
 
     // Create completed button
     let completedButton = document.createElement("button");
-    completedButton.textContent = "Complete";
+    // change the button label based on the todo's completed status
+    if (todo.completed) {
+      completedButton.textContent = "Undo";
+    } else {
+      completedButton.textContent = "Complete";
+    }
+
+    // call the helper function to set up the completed button
+    setupCompletedButton(completedButton, index);
+    // append the completed button to the todo item
     todoItem.appendChild(completedButton);
 
     // create the delete button
@@ -52,6 +68,15 @@ function addNewTodo(event) {
 }
 // when the user submits the input form calling the function creates a new todo
 document.addEventListener("submit", addNewTodo);
+
+function setupCompletedButton(completedButton, index) {
+  completedButton.addEventListener("click", () => {
+    // toggle the completed status - flip it to the opposite
+    todos[index].completed = !todos[index].completed;
+    populateTodoList(todos);
+  });
+}
+function deleteTodo() {}
 
 // Advanced challenge: Write a function that checks the todos in the todo list and deletes the completed ones (we can check which ones are completed by seeing if they have the line-through styling applied or not).
 function deleteAllCompletedTodos() {
