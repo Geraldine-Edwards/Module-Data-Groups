@@ -1,6 +1,24 @@
 function populateTodoList(todos) {
-  let list = document.getElementById("todo-list");
   // Write your code to create todo list elements with completed and delete buttons here, all todos should display inside the "todo-list" element.
+  let list = document.getElementById("todo-list");
+  // clear the list before populating it to ensure that when adding todos the list does not duplicate because it is cleared initially
+  list.textContent = "";
+  // for each todos object, create a list item and append it to the list
+  todos.forEach((todo) => {
+    let todoItem = document.createElement("li");
+    todoItem.textContent = todo.task;
+    list.appendChild(todoItem);
+
+    // Create completed button
+    let completedButton = document.createElement("button");
+    completedButton.textContent = "Complete";
+    todoItem.appendChild(completedButton);
+
+    // create the delete button
+    let deleteButton = document.createElement("button");
+    deleteButton.textContent = "Delete";
+    todoItem.appendChild(deleteButton);
+  });
 }
 
 // These are the same todos that currently display in the HTML
@@ -17,9 +35,25 @@ function addNewTodo(event) {
   // The code below prevents the page from refreshing when we click the 'Add Todo' button.
   event.preventDefault();
   // Write your code here... and remember to reset the input field to be blank after creating a todo!
+  // get the value of the input in the todo input field
+  let todoInput = document.getElementById("todo");
+  // remove the spaces at the start and end of the input
+  let newTodo = todoInput.value.trim();
+  // if the input is empty, do not add a new todo and just return the function (to prevent adding empty todos)
+  if (!newTodo) {
+    return;
+  }
+  // create a new todo object and add it to the todos array
+  todos.push({ task: newTodo, completed: false });
+  // repopulate the todo list with the updated todos array
+  populateTodoList(todos);
+  // reset the input field to be blank
+  todoInput.value = "";
 }
+// when the user submits the input form calling the function creates a new todo
+document.addEventListener("submit", addNewTodo);
 
-// Advanced challenge: Write a fucntion that checks the todos in the todo list and deletes the completed ones (we can check which ones are completed by seeing if they have the line-through styling applied or not).
+// Advanced challenge: Write a function that checks the todos in the todo list and deletes the completed ones (we can check which ones are completed by seeing if they have the line-through styling applied or not).
 function deleteAllCompletedTodos() {
   // Write your code here...
 }

@@ -3,13 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Title here</title>
+    <title>My To Do List</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <form>
       <div>
-        <input type="text" placeholder="New todo..." />
+        <input type="text" id="todo" placeholder="New todo..." />
       </div>
       <div>
         <button type="submit">Add Todo</button>
@@ -22,6 +22,9 @@
         </button>
       </div>
     </form>
+    <ul id="todo-list">
+      <!-- Todo items will be populated here -->
+    </ul>
     <script src="script.js"></script>
   </body>
 </html>
