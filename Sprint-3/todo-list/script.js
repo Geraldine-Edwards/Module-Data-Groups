@@ -16,14 +16,14 @@ function populateTodoList(todos) {
     // append the todo item to the list
     list.appendChild(todoItem);
 
-    // call the helper function to create the completed button
+    // call the helper function to create the completedbutton
     let completedButton = createCompletedButton(todo, index);
     // append the completed button to the todo item
     todoItem.appendChild(completedButton);
 
-    // create the delete button
-    let deleteButton = document.createElement("button");
-    deleteButton.textContent = "Delete";
+    // call the helper function to create the delete button
+    let deleteButton = createDeleteButton(todo, index);
+    // append the button to the todo item
     todoItem.appendChild(deleteButton);
   });
 }
@@ -75,7 +75,24 @@ function createCompletedButton(todo, index) {
   return completedButton;
 }
 
-function deleteTodo() {}
+function createDeleteButton(todo, index) {
+  // create the delete button
+  let deleteButton = document.createElement("button");
+  // set the text of the button
+  deleteButton.textContent = "Delete";
+  // add the functionality to the button
+  deleteButton.addEventListener("click", (event) => {
+    // confirm if the user wants to delete the todo
+    if (confirm("Are you sure you want to delete this todo?")) {
+      // remove the todo at this specific index
+      todos.splice(index, 1);
+      // refresh the display
+      populateTodoList(todos);
+    }
+  });
+  // return the delete button so it can be added to the todo item
+  return deleteButton;
+}
 
 // Advanced challenge: Write a function that checks the todos in the todo list and deletes the completed ones (we can check which ones are completed by seeing if they have the line-through styling applied or not).
 function deleteAllCompletedTodos() {
