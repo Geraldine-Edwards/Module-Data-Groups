@@ -7,16 +7,19 @@ function populateTodoList(todos) {
   todos.forEach((todo, index) => {
     // create a list element for each todo
     let todoItem = document.createElement("li");
-    // update the text content in the list with the todo input
-    todoItem.textContent = todo.task;
+
+    // create a span for the todo text
+    let todoText = document.createElement("span");
+    todoText.textContent = todo.task;
+
     // if the todo is completed, add a line-through style to the text
     if (todo.completed) {
-      todoItem.style.textDecoration = "line-through";
+      todoText.style.textDecoration = "line-through";
     }
-    // append the todo item to the list
-    list.appendChild(todoItem);
+    // append the text span to the todoItem
+    todoItem.appendChild(todoText);
 
-    // call the helper function to create the completedbutton
+    // call the helper function to create the completed button
     let completedButton = createCompletedButton(todo, index);
     // append the completed button to the todo item
     todoItem.appendChild(completedButton);
@@ -25,6 +28,9 @@ function populateTodoList(todos) {
     let deleteButton = createDeleteButton(todo, index);
     // append the button to the todo item
     todoItem.appendChild(deleteButton);
+
+    // append the todo item to the list
+    list.appendChild(todoItem);
   });
 }
 
@@ -61,10 +67,17 @@ function addNewTodo(event) {
 document.addEventListener("submit", addNewTodo);
 
 function createCompletedButton(todo, index) {
-  // create the complete button
+  // create the complete icon element
   let completedButton = document.createElement("button");
-  // toggle the text of the button depending on complete status
-  completedButton.textContent = todo.completed ? "Incomplete" : "Complete";
+
+  // add an id to the button
+  completedButton.id = "complete-button";
+  // toggle the icon depending on complete status
+  if (todo.completed) {
+    completedButton.innerHTML = '<i class="fa fa-undo"></i> Undo';
+  } else {
+    completedButton.innerHTML = '<i class="fa fa-check"></i> Complete';
+  }
   // add the functionality to the button
   completedButton.addEventListener("click", () => {
     // toggle the completed status - flip it to the opposite
@@ -77,9 +90,10 @@ function createCompletedButton(todo, index) {
 
 function createDeleteButton(todo, index) {
   // create the delete button
-  let deleteButton = document.createElement("button");
+  let deleteButton = document.createElement("button"); // add ID for delete button
+  deleteButton.id = "delete-button";
   // set the text of the button
-  deleteButton.textContent = "Delete";
+  deleteButton.innerHTML = '<i class="fa fa-trash"></i> Delete';
   // add the functionality to the button
   deleteButton.addEventListener("click", (event) => {
     // confirm if the user wants to delete the todo
@@ -95,6 +109,29 @@ function createDeleteButton(todo, index) {
 }
 
 // Advanced challenge: Write a function that checks the todos in the todo list and deletes the completed ones (we can check which ones are completed by seeing if they have the line-through styling applied or not).
+
 function deleteAllCompletedTodos() {
-  // Write your code here...
+  // count the number of completed todos
+  const completedCount = todos.filter((todo) => todo.completed).length;
+  // check if there are any completed todos
+  if (completedCount === 0) {
+    // return an alert if there are no completed todos
+    alert("No completed todos to delete.");
+    return;
+  }
+  // if there are completed todos, confirm with the user if they want to delete the specific number of completed todos
+  if (
+    confirm(
+      `Are you sure you want to delete these ${completedCount} completed todos?`
+    )
+  ) {
+    // if the todos are not completed, filter them out of the todos array and update the original array with them
+    todos = todos.filter((todo) => !todo.completed);
+    // repopulate the todo list with the updated todos array
+    populateTodoList(todos);
+  }
 }
+// add an event listener to the remove all completed button
+document
+  .getElementById("remove-all-completed")
+  .addEventListener("click", deleteAllCompletedTodos);
