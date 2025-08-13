@@ -19,6 +19,14 @@ function populateTodoList(todos) {
     // append the text span to the todoItem
     todoItem.appendChild(todoText);
 
+    // add the deadline details if it exists
+    if (todo.deadline) {
+      let deadlineText = document.createElement("span");
+      // add the text
+      deadlineText.textContent = ` (Due By: ${todo.deadline})`;
+      // append to the todo item itself
+      todoItem.appendChild(deadlineText);
+    }
     // call the helper function to create the completed button
     let completedButton = createCompletedButton(todo, index);
     // append the completed button to the todo item
@@ -50,18 +58,24 @@ function addNewTodo(event) {
   // Write your code here... and remember to reset the input field to be blank after creating a todo!
   // get the value of the input in the todo input field
   let todoInput = document.getElementById("todo");
+  // get the todo-deadline input
+  let todoDeadline = document.getElementById("todo-deadline");
   // remove the spaces at the start and end of the input
   let newTodo = todoInput.value.trim();
+  // get the value of the deadline input or null if no date selected
+  let deadline = todoDeadline.value || null;
   // if the input is empty, do not add a new todo and just return the function (to prevent adding empty todos)
   if (!newTodo) {
     return;
   }
   // create a new todo object and add it to the todos array
-  todos.push({ task: newTodo, completed: false });
+  todos.push({ task: newTodo, completed: false, deadline: deadline });
   // repopulate the todo list with the updated todos array
   populateTodoList(todos);
   // reset the input field to be blank
   todoInput.value = "";
+  // reset the deadline input to be blank
+  todoDeadline.value = "";
 }
 // when the user submits the input form calling the function creates a new todo
 document.addEventListener("submit", addNewTodo);
